@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Create Product</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+
+<div class="container">
+
+    <h1 style="text-align:center; margin-bottom:20px;">
+        Create Product
+    </h1>
+
+    <form id="productForm">
+
+        <input type="text" name="name" placeholder="Product Name" required>
+
+        <textarea name="description" placeholder="Description"></textarea>
+
+        <input type="number" name="price" placeholder="Price" required>
+
+        <input type="text" name="category" placeholder="Category">
+
+        <select name="inStock">
+
+            <option value="true">
+                In Stock
+            </option>
+
+            <option value="false">
+                Out Of Stock
+            </option>
+
+        </select>
+
+        <button type="submit" class="btn">
+            Create Product
+        </button>
+
+    </form>
+
+</div>
+
+<script>
+
+const form = document.getElementById("productForm");
+
+form.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const formData = {
+
+        name: form.name.value,
+        description: form.description.value,
+        price: form.price.value,
+        category: form.category.value,
+        inStock: form.inStock.value === "true"
+
+    };
+
+    const response = await fetch("/api/products", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(formData)
+
+    });
+
+    const data = await response.json();
+
+    alert(data.message);
+
+    window.location.href = "/";
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Single Product</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<h1><%= product.name %></h1>
+
+<p><%= product.description %></p>
+
+<p>₹ <%= product.price %></p>
+
+<p><%= product.category %></p>
+
+<p>
+  <%= product.inStock ? "In Stock" : "Out of Stock" %>
+</p>
+
+<button onclick="deleteProduct()">Delete</button>
+
+<script>
+
+async function deleteProduct() {
+
+  const confirmDelete = confirm("Are you sure?");
+
+  if(confirmDelete){
+
+    const response = await fetch(
+      "/api/products/<%= product._id %>",
+      {
+        method: "DELETE"
+      }
+    );
+
+    const data = await response.json();
+
+    alert(data.message);
+
+    window.location.href = "/";
+  }
+
+}
+
+</script>
+
+</body>
+</html>

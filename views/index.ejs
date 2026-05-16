@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Products</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="heading">
+
+        <h1>Product Management</h1>
+
+        <a href="/create" class="btn">
+            Add Product
+        </a>
+
+    </div>
+
+    <div class="product-container">
+
+        <% products.forEach(product => { %>
+
+            <div class="card">
+
+                <h2><%= product.name %></h2>
+
+                <p><%= product.description %></p>
+
+                <p class="price">
+                    ₹ <%= product.price %>
+                </p>
+
+                <p>
+                    Category:
+                    <%= product.category %>
+                </p>
+
+                <span class="stock <%= product.inStock ? 'instock' : 'outstock' %>">
+
+                    <%= product.inStock ? 'In Stock' : 'Out Of Stock' %>
+
+                </span>
+
+                <div class="action-btns">
+
+                    <a href="/single/<%= product._id %>" class="btn">
+                        View
+                    </a>
+
+                    <a href="/edit/<%= product._id %>" class="btn edit-btn">
+                        Edit
+                    </a>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+</div>
+
+</body>
+</html>
