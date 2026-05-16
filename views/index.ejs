@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
     <title>Products</title>
@@ -7,64 +8,77 @@
     <link rel="stylesheet" href="/css/style.css">
 
 </head>
+
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <div class="heading">
+        <div class="heading">
 
-        <h1>Product Management</h1>
+            <h1>Product Management</h1>
 
-        <a href="/create" class="btn">
-            Add Product
-        </a>
+            <a href="/create" class="btn">
+                Add Product
+            </a>
 
-    </div>
+        </div>
 
-    <div class="product-container">
+        <div class="product-container">
 
-        <% products.forEach(product => { %>
+            <% products.forEach(product=> { %>
 
-            <div class="card">
+                <div class="card">
 
-                <h2><%= product.name %></h2>
+                    <h2>
+                        <%= product.name %>
+                    </h2>
 
-                <p><%= product.description %></p>
+                    <p>
+                        <%= product.description %>
+                    </p>
 
-                <p class="price">
-                    ₹ <%= product.price %>
-                </p>
+                    <p class="price">
+                        ₹ <%= product.price %>
+                    </p>
 
-                <p>
-                    Category:
-                    <%= product.category %>
-                </p>
+                    <p>
+                        Category:
+                        <%= product.category %>
+                    </p>
 
-                <span class="stock <%= product.inStock ? 'instock' : 'outstock' %>">
+                    <span class="stock <%= product.inStock ? 'instock' : 'outstock' %>">
 
-                    <%= product.inStock ? 'In Stock' : 'Out Of Stock' %>
+                        <%= product.inStock ? 'In Stock' : 'Out Of Stock' %>
 
-                </span>
+                    </span>
 
-                <div class="action-btns">
+                    <div class="action-btns">
 
-                    <a href="/single/<%= product._id %>" class="btn">
-                        View
-                    </a>
+                        <a href="/single/<%= product._id %>" class="btn">
+                            View
+                        </a>
 
-                    <a href="/edit/<%= product._id %>" class="btn edit-btn">
-                        Edit
-                    </a>
+                        <a href="/edit/<%= product._id %>" class="btn edit-btn">
+                            Edit
+                        </a>
+                        <form action="/delete/<%= product._id %>" method="POST">
+
+                            <button type="submit" class="btn delete-btn">
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </div>
 
                 </div>
 
-            </div>
+                <% }) %>
 
-        <% }) %>
+        </div>
 
     </div>
 
-</div>
-
 </body>
+
 </html>

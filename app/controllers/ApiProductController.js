@@ -4,10 +4,12 @@ class ProductController {
 
   // Create Product
   async createProduct(req, res) {
+
     try {
 
       const { name, description, price, category, inStock } = req.body;
 
+      // Validation
       if (!name || !price) {
         return res.status(400).json({
           success: false,
@@ -15,6 +17,20 @@ class ProductController {
         });
       }
 
+      // Check duplicate product
+      const existingProduct = await Product.findOne({
+        name,
+        description
+      });
+
+      if (existingProduct) {
+        return res.status(400).json({
+          success: false,
+          message: "Product with same name and description already exists"
+        });
+      }
+
+      // Create product
       const product = new Product({
         name,
         description,
@@ -40,6 +56,7 @@ class ProductController {
 
     }
   }
+
 
   // Get All Products
   async getProducts(req, res) {

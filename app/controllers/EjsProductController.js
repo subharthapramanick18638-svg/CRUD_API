@@ -32,6 +32,21 @@ class EjsProductController {
       product
     });
   }
+  async deleteProduct(req, res) {
+
+    try {
+
+      await Product.findByIdAndDelete(req.params.id);
+
+      res.redirect("/");
+
+    } catch (error) {
+
+      res.send(error.message);
+
+    }
+
+  }
 
 }
 
